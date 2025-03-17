@@ -23,6 +23,7 @@ public class InfoActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
     ImageView menu;
     ImageView whatsappHelp;
+    ImageView callHelp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class InfoActivity extends AppCompatActivity implements NavigationView.On
         navigationView = findViewById(R.id.navigationView);
         menu = findViewById(R.id.menu);
         whatsappHelp = findViewById(R.id.whatsappHelp);
+        callHelp = findViewById(R.id.callHelp);
 
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -53,6 +55,14 @@ public class InfoActivity extends AppCompatActivity implements NavigationView.On
                 String phoneNumber = "254794761574"; // Replace with your WhatsApp number
                 String message = "For any help, please click the icon.";
                 openWhatsApp(phoneNumber, message);
+            }
+        });
+
+        callHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String phoneNumber = "0794761574"; // Replace with your call number
+                openCall(phoneNumber);
             }
         });
 
@@ -111,5 +121,11 @@ public class InfoActivity extends AppCompatActivity implements NavigationView.On
             i.putExtra(Intent.EXTRA_TEXT, message);
             startActivity(i);
         }
+    }
+
+    private void openCall(String phoneNumber) {
+        Intent callIntent = new Intent(Intent.ACTION_DIAL);
+        callIntent.setData(Uri.parse("tel:" + phoneNumber));
+        startActivity(callIntent);
     }
 }
